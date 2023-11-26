@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.amal.livres.entities.Genre;
 import com.amal.livres.entities.Livre;
+import com.amal.livres.repos.ImageRepository;
 import com.amal.livres.repos.LivreRepository;
 
 
@@ -15,6 +16,9 @@ public class LivreServiceImpl implements LivreService{
 	
 	@Autowired
 	LivreRepository livreRepository;
+	
+	@Autowired
+	ImageRepository imageRepository;
 
 
 	@Override
@@ -24,8 +28,15 @@ public class LivreServiceImpl implements LivreService{
 
 	@Override
 	public Livre updateLivre(Livre l) {
-		return livreRepository.save(l);
+		//Long oldProdImageId = 
+				//this.getLivre(l.getIdLivre()).getImage().getIdImage();
+		//Long newProdImageId = l.getImage().getIdImage();
+		Livre livreUpdated = livreRepository.save(l);
+		//if(oldProdImageId != newProdImageId) 
+			//imageRepository.deleteById(oldProdImageId);
+		return livreUpdated;
 	}
+	
 
 	@Override
 	public void deleteLivre(Livre l) {

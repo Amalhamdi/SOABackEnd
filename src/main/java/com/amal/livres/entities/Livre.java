@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,8 +32,11 @@ public class Livre {
 	@ManyToOne
 	private Genre genre;
 	
-	@OneToOne
-	private Image image;
+	/*@OneToOne
+	private Image image;*/
+	
+	@OneToMany (mappedBy = "livre")
+	 private List<Image> images;
 	
 	/*
 	

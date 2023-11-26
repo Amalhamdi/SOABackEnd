@@ -1,6 +1,7 @@
 package com.amal.livres.service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.http.MediaType;
 import com.amal.livres.entities.Image;
+import com.amal.livres.entities.Livre;
 import com.amal.livres.repos.ImageRepository;
+import com.amal.livres.repos.LivreRepository;
 
 
 @Service
@@ -20,6 +23,9 @@ public class ImageServiceImpl implements ImageService{
 	
 	@Autowired
 	LivreService livreService;
+	
+	@Autowired
+	LivreRepository livreRepository;
 
 
 	@Override
@@ -51,6 +57,25 @@ public class ImageServiceImpl implements ImageService{
 	@Override
 	public void deleteImage(Long id) {
 		imageRepository.deleteById(id);
+	}
+
+	@Override
+	public Image uplaodImageLivre(MultipartFile file,Long idLivre) 
+	throws IOException {
+	Livre l = new Livre();
+	l.setIdLivre(idLivre);
+	return imageRepository.save(Image.builder()
+	 .name(file.getOriginalFilename())
+	 .type(file.getContentType())
+	 .image(file.getBytes())
+	 .livre(l).build() );
+	}
+
+
+	@Override
+	public List<Image> getImagesParLivre(Long livreId) {
+		Livre l = livreRepository.findById(livreId).get();
+		return l.getImages();
 	}
 
 }

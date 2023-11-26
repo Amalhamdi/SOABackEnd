@@ -9,6 +9,7 @@ import com.amal.livres.entities.Image;
 import com.amal.livres.service.ImageService;
 
 import java.io.IOException;
+import java.util.List;
 @RestController
 @RequestMapping("/api/image")
 @CrossOrigin(origins = "*")
@@ -44,5 +45,19 @@ public class ImageRESTController {
 	 public Image UpdateImage(@RequestParam("image")MultipartFile file) throws IOException {
 	 return imageService.uplaodImage(file);
 	 }
+	 
+	 @PostMapping(value = "/uplaodImageLivre/{idLivre}" )
+	 public Image uploadMultiImages(@RequestParam("image")MultipartFile file,
+	 @PathVariable("idLivre") Long idLivre) 
+	throws IOException {
+	 return imageService.uplaodImageLivre(file,idLivre);
+	 }
+	 
+	 @RequestMapping(value = "/getImagesLivre/{idLivre}" , 
+			 method = RequestMethod.GET)
+			 public List<Image> getImagesLivre(@PathVariable("idLivre") Long idLivre) 
+			throws IOException {
+			 return imageService.getImagesParLivre(idLivre);
+			 }
 	 
 	}
