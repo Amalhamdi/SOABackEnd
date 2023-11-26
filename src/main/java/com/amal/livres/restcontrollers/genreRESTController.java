@@ -21,13 +21,13 @@ public class genreRESTController {
 	GenreRepository genreRepositorry;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public List<Genre> getAllCategories()
+	public List<Genre> getAllGenres()
 	{
 	return genreRepositorry.findAll();
 	}
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
-	public Genre getCategorieById(@PathVariable("id") Long id) {
+	public Genre getGenreById(@PathVariable("id") Long id) {
 	return genreRepositorry.findById(id).get();
 	}
 	
