@@ -1,5 +1,8 @@
 package com.amal.livres.service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +49,13 @@ public class LivreServiceImpl implements LivreService{
 
 	@Override
 	public void deleteLivreById(Long id) {
-		// TODO Auto-generated method stub
+		// supprimer l'image avant de supprimer le produit 
+		Livre l = getLivre(id);
+		try {
+			Files.delete(Paths.get(System.getProperty("user.home")+"/images/"+l.getImagePath()));
+			} catch (IOException e) {
+			e.printStackTrace();
+			} 
 		livreRepository.deleteById(id);
 		
 	}

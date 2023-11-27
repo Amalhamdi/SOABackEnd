@@ -38,6 +38,8 @@ public class Livre {
 	@OneToMany (mappedBy = "livre")
 	 private List<Image> images;
 	
+	private String imagePath;
+	
 	/*
 	
 	public Genre getGenre() {

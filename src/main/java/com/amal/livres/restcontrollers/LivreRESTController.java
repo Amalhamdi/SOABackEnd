@@ -1,5 +1,8 @@
 package com.amal.livres.restcontrollers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.amal.livres.entities.Livre;
 import com.amal.livres.service.LivreService;
@@ -57,5 +62,5 @@ public class LivreRESTController {
 	public List<Livre> findByNomLivreContains(@PathVariable("nom") String nom) {
 	return livreService.findByNomLivreContains(nom);
 	}
-
+	
 }
